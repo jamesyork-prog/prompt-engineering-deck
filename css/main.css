@@ -140,3 +140,34 @@ body {
 .hide-cursor {
   cursor: none !important;
 }
+
+/* ---- TCREI Tabs ---- */
+.tcrei-tabs button {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.tcrei-tabs button.active {
+  background-color: #FF555E;
+  color: #ffffff;
+}
+.tcrei-content {
+  position: relative;
+  height: 8rem;
+  margin-top: 1.5rem;
+}
+.tcrei-pane {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(1rem);
+  transition: opacity 0.4s, transform 0.4s;
+}
+.tcrei-pane.active {
+  opacity: 1;
+  transform: translateX(0);
+}

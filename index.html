@@ -87,8 +87,19 @@
         <circle cx="492" cy="50" r="24" fill="#fff" stroke="#000" stroke-width="3"/>
         <text x="492" y="55" font-size="18" text-anchor="middle" fill="#000">I</text>
       </svg>
-      <div class="mt-6 flex justify-center gap-10 text-base md:text-xl">
-        <span>Task</span><span>Context</span><span>References</span><span>Evaluate</span><span>Iterate</span>
+      <div class="mt-6 flex justify-center gap-4 text-base md:text-xl tcrei-tabs">
+        <button class="tcrei-tab active" data-target="task">Task</button>
+        <button class="tcrei-tab" data-target="context">Context</button>
+        <button class="tcrei-tab" data-target="references">References</button>
+        <button class="tcrei-tab" data-target="evaluate">Evaluate</button>
+        <button class="tcrei-tab" data-target="iterate">Iterate</button>
+      </div>
+      <div id="tcrei-content" class="tcrei-content w-full max-w-xl text-flash-black text-lg mx-auto">
+        <div id="task" class="tcrei-pane active">Be clear and specific about what you want the AI to do.</div>
+        <div id="context" class="tcrei-pane">Provide background, audience, and constraints.</div>
+        <div id="references" class="tcrei-pane">Give examples or data for more accurate output.</div>
+        <div id="evaluate" class="tcrei-pane">Review the response to ensure it meets your needs.</div>
+        <div id="iterate" class="tcrei-pane">Refine your prompt and repeat for better results.</div>
       </div>
     </div>
   </section>

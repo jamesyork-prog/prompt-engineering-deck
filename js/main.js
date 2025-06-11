@@ -144,6 +144,24 @@ document.addEventListener('DOMContentLoaded', () => {
     chatContainer.innerHTML = '';
   });
 
+  // ---- TCREI Tabs Logic ----
+  const tcreiTabs = document.querySelectorAll('.tcrei-tab');
+  const tcreiPanes = document.querySelectorAll('.tcrei-pane');
+  tcreiTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-target');
+      tcreiTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      tcreiPanes.forEach(pane => {
+        if (pane.id === target) {
+          pane.classList.add('active');
+        } else {
+          pane.classList.remove('active');
+        }
+      });
+    });
+  });
+
   // Initial setup
   showSlide(currentSlide);
 
