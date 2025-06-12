@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navRight.addEventListener('click', () => { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); });
   navLeft.addEventListener('click', () => { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); } 
+    if (e.key === 'ArrowRight') { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
     else if (e.key === 'ArrowLeft') { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); }
   });
 
