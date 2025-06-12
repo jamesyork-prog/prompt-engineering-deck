@@ -1,4 +1,5 @@
 /* main.css */
+@import "tailwindcss";
 
 body {
   font-family: 'Outfit', sans-serif;
@@ -25,29 +26,22 @@ body {
   z-index: 10;
 }
 
-.text-flash-coral { color: #FF555E; }
-.text-flash-black { color: #000000; }
-
 .nav-arrow {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.1);
-  color: rgba(0, 0, 0, 0.4);
-  border-radius: 9999px;
-  width: 48px;
+  background-color: rgba(0, 0, 0, 0.1); /* Default background */
+  color: rgba(0, 0, 0, 0.4); /* Default color */
+  border-radius: 9999px; /* Added from common styles for arrows */
+  width: 48px; /* Added from common styles for arrows */
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.5s ease-in-out; /* Be more specific or use 'all' if intended */
   z-index: 100;
   border: none;
-}
-.nav-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 1);
 }
 #nav-left { left: 24px; }
 #nav-right { right: 24px; }
@@ -130,9 +124,6 @@ body {
   .slide { padding: 1rem !important; }
 }
 
-.nav-arrow {
-  transition: opacity 0.5s;
-}
 .nav-arrow.nav-arrow-hidden {
   opacity: 0;
   pointer-events: none;
@@ -170,4 +161,73 @@ body {
 .tcrei-pane.active {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* ---- Fully Updated Logo Carousel Styles ---- */
+
+/* This is the visible window with faded edges. */
+.logo-carousel {
+  width: 100%;
+  max-width: 80vw;
+  overflow: hidden;
+  position: relative;
+  /* This value pushes the carousel down from the text above it. */
+  /* You can adjust this value (e.g., 4rem, 8rem) to fine-tune the position. */
+  margin-top: 6rem;
+}
+
+.logo-carousel::before,
+.logo-carousel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+}
+
+.logo-carousel::before {
+  left: 0;
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+.logo-carousel::after {
+  right: 0;
+  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+}
+
+/* This is the parent container that gets animated. */
+.logo-track {
+  display: flex;
+  width: fit-content;
+  /* You can adjust the speed of the carousel here (e.g., 20s for faster). */
+  animation: scroll 40s linear infinite;
+}
+
+/* This container holds one complete set of logos. */
+.logo-set {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-shrink: 0;
+  padding-right: 4rem;
+}
+
+/* This styles the individual logo images. */
+.logo-item {
+  /* This single line ensures all logos have a uniform height. */
+  /* Adjust this value (e.g., 50px, 70px) to change the logo size. */
+  height: 60px;
+  width: auto;
+  object-fit: contain; /* This prevents the logos from stretching or distorting. */
+}
+
+/* The animation for the seamless scroll. */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
