@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const SVG_ARROW_LEFT_LIGHT = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
   const SVG_ARROW_RIGHT_LIGHT = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>';
 
+
   // --- Core Functions ---
+
   function setupLogoCarousel() {
     const track = document.querySelector('.logo-track');
     if (track) {
@@ -79,6 +81,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function resetSlide5FlowchartAnimation() {
+    const flowchart = document.getElementById('tcrei-flowchart');
+    if (flowchart) {
+      flowchart.classList.remove('start-animation');
+    }
+  }
+
   function updateProgressBar() {
     const percent = ((currentSlide) / (slides.length - 1)) * 100;
     if (progressBar) progressBar.style.width = percent + '%';
@@ -86,15 +95,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showSlide(newIndex) {
     const oldIndex = currentSlide;
+    // Reset animations on the slide we are leaving
     if (oldIndex !== newIndex) {
       const oldSlide = slides[oldIndex];
       if (oldSlide && oldSlide.classList.contains('active')) {
         if (oldIndex === 1) resetSlide2QuoteAnimation();
         else if (oldIndex === 2) resetSlide3ChatAnimation();
         else if (oldIndex === 3) resetSlide4ChatAnimation();
+        else if (oldIndex === 4) resetSlide5FlowchartAnimation(); // Reset new flowchart
       }
     }
+    
     currentSlide = newIndex;
+
+    // Trigger animation for the slide we are entering
+    if (newIndex === 4) { // Slide 5 is at index 4
+      const flowchart = document.getElementById('tcrei-flowchart');
+      // Use a small timeout to ensure the animation plays after the slide is visible
+      setTimeout(() => {
+        if (flowchart) flowchart.classList.add('start-animation');
+      }, 100);
+    }
+
     slides.forEach((slide) => slide.classList.remove('active'));
     const targetSlide = slides[newIndex];
     if (targetSlide) {
