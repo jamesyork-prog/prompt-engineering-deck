@@ -107,38 +107,50 @@
     </section>
 
     <!-- Slide 5: TCREI Framework Overview (Redesigned) -->
-    <section class="slide bg-white flex flex-col justify-center p-12 md:p-16" data-theme="light">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        <div class="flex flex-col justify-center text-center md:text-left">
-          <h2 class="text-flash-black font-bold text-5xl mb-8">The TCREI Framework</h2>
-          <p class="text-flash-black text-2xl font-light mb-6">
-            A systematic approach for getting the best from any AI tool. Click each component to learn more as we walk through them.
-          </p>
-          <div class="flex items-center justify-center md:justify-start bg-gray-100 p-4 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF555E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-4 flex-shrink-0"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path><path d="M21 3v6h-6"></path></svg>
-            <p class="font-medium text-flash-black">The final step is to <span class="font-bold text-flash-coral">Iterate</span>—refine your prompt and repeat the process for better results.</p>
-          </div>
-        </div>
+    <section class="slide bg-white flex flex-col justify-center items-center text-center p-12" data-theme="light">
+    <h2 class="text-flash-black font-bold text-5xl mb-4">The TCREI Framework</h2>
+      <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-12">
+        A systematic approach for getting the best from any AI tool.
+      </p>
+      
+      <div class="w-full max-w-4xl mx-auto">
+        <svg id="tcrei-flowchart" viewBox="0 0 800 300" class="w-full">
+            <defs>
+                <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5"
+                    markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF555E" />
+                </marker>
 
-        <!-- Right Column: Interactive Grid -->
-        <div class="grid grid-cols-2 grid-rows-2 gap-6">
-          <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-xl shadow-sm transition-all">
-            <h4 class="text-flash-coral font-bold text-2xl mb-2">Task</h4>
-            <p class="text-flash-black">Be clear and specific about what you want the AI to do.</p>
-          </div>
-          <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-xl shadow-sm transition-all">
-            <h4 class="text-flash-coral font-bold text-2xl mb-2">Context</h4>
-            <p class="text-flash-black">Provide background, audience, and constraints.</p>
-          </div>
-          <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-xl shadow-sm transition-all">
-            <h4 class="text-flash-coral font-bold text-2xl mb-2">References</h4>
-            <p class="text-flash-black">Give examples or data for more accurate output.</p>
-          </div>
-          <div class="bg-gray-50 hover:bg-gray-100 p-6 rounded-xl shadow-sm transition-all">
-            <h4 class="text-flash-coral font-bold text-2xl mb-2">Evaluate</h4>
-            <p class="text-flash-black">Review the response to ensure it meets your needs.</p>
-          </div>
-        </div>
+                <marker id="arrowhead-iterate" viewBox="0 0 10 10" refX="8" refY="5"
+                    markerWidth="6" markerHeight="6" orient="245">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF555E" />
+                </marker>
+            </defs>
+
+            <g id="flow-box-task" class="flow-box">
+              <rect x="50" y="50" width="150" height="60" rx="8" />
+              <text x="125" y="85">Task</text>
+            </g>
+            <g id="flow-box-context" class="flow-box">
+              <rect x="250" y="50" width="150" height="60" rx="8" />
+              <text x="325" y="85">Context</text>
+            </g>
+            <g id="flow-box-references" class="flow-box">
+              <rect x="450" y="50" width="150" height="60" rx="8" />
+              <text x="525" y="85">References</text>
+            </g>
+            <g id="flow-box-evaluate" class="flow-box">
+              <rect x="650" y="50" width="150" height="60" rx="8" />
+              <text x="725" y="85">Evaluate</text>
+            </g>
+
+            <path id="flow-arrow-1" class="flow-arrow" d="M 200 80 H 250" marker-end="url(#arrowhead)" />
+            <path id="flow-arrow-2" class="flow-arrow" d="M 400 80 H 450" marker-end="url(#arrowhead)" />
+            <path id="flow-arrow-3" class="flow-arrow" d="M 600 80 H 650" marker-end="url(#arrowhead)" />
+
+            <path id="flow-arrow-iterate" class="flow-arrow" d="M 725 110 C 725 190, 125 190, 125 110" marker-end="url(#arrowhead-iterate)" />
+            <text id="flow-text-iterate" class="flow-text" x="425" y="210">Iterate & Refine</text>
+        </svg>
       </div>
     </section>
 
@@ -220,7 +232,7 @@
         <li>Brainstorming campaign ideas</li>
       </ul>
     </section>
-    
+
     <!-- Slide 15: Key Takeaways -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
       <h2 class="text-flash-black font-bold text-5xl mb-8">Key Takeaways</h2>
