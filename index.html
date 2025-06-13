@@ -17,54 +17,87 @@
 
     <!-- Slide 1: Title + Welcome -->
     <section class="slide active bg-white flex flex-col justify-center items-center text-center p-8" data-theme="light">
-      <h1 class="text-flash-black font-bold text-6xl md:text-8xl mb-4">Mastering Prompt Engineering</h1>
-      <p class="text-flash-black text-xl md:text-2xl font-light mb-16">Flash Internal Presentation</p>
+      <h1 class="text-flash-black font-bold text-6xl md:text-8xl mb-8">Mastering Prompt Engineering</h1>
+      <p class="text-flash-black text-xl md:text-2xl font-light mb-16">A Flash AI Presentation</p>
       <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
         <svg width="100" height="25" viewBox="0 0 100 25"><rect width="100" height="25" rx="4" fill="#E0E0E0"/><text x="50" y="17" font-family="Outfit, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">FLASH</text></svg>
       </div>
     </section>
+    <!-- Slide 2: Why This Matters at Flash -->
 
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-  <h2 class="text-flash-black font-bold text-5xl mb-4">Why This Matters at Flash</h2>
-  <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-16">
-    Generative AI is becoming core to our daily work. To get real value - whether you’re using Gemini, NotebookLM, ChatGPT, or Claude - you need to communicate effectively with these systems. Think of today as learning a new language, one that automates tasks, accelerates research, and amplifies your expertise.
-  </p>
-
-  <div class="logo-carousel">
-    <div class="logo-track">
-      <div class="logo-set">
-        <img src="assets/notebook-logo.svg" alt="NotebookLM logo" class="logo-item"/>
-        <img src="assets/Claude-AI-logo.svg" alt="Claude logo" class="logo-item"/>
-        <img src="assets/chatgpt-logo.png" alt="ChatGPT Logo" class="logo-item"/>
-        <img src="assets/OpenAI-black-wordmark.svg" alt="OpenAI Logo" class="logo-item"/>
-        <img src="assets/gemini-name-logo.png" alt="Gemini Name Logo" class="logo-item"/>
-        <img src="assets/cursor-logo.svg" alt="Cursor logo" class="logo-item"/>
-      </div> </div>
-  </div>
-</section>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Why This Matters at Flash</h2>
+      <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-16">
+        Generative AI is becoming core to our daily work. To get real value - whether you’re using Gemini, NotebookLM, ChatGPT, or Claude - you need to communicate effectively with these systems. Think of today as learning a new language, one that automates tasks, accelerates research, and amplifies your expertise.
+      </p>
+      <p id="slide2-quote" class="text-flash-black text-2xl italic font-light max-w-3xl mx-auto transition-opacity duration-700 opacity-0">
+        "The goal isn't to replace your expertise — it's to amplify it."
+      </p>
+      <div class="logo-carousel">
+        <div class="logo-track">
+          <div class="logo-set">
+            <img src="assets/notebook-logo.svg" alt="NotebookLM logo" class="logo-item logo-notebook"/>
+            <img src="assets/Claude-AI-logo.svg" alt="Claude logo" class="logo-item"/>
+            <img src="assets/chatgpt-logo.png" alt="ChatGPT Logo" class="logo-item"/>
+            <img src="assets/OpenAI-black-wordmark.svg" alt="OpenAI Logo" class="logo-item logo-openai"/>
+            <img src="assets/gemini-name-logo.png" alt="Gemini Name Logo" class="logo-item logo-gemini"/>
+            <img src="assets/cursor-logo.svg" alt="Cursor logo" class="logo-item"/>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Slide 3: What is a Prompt? -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-4">What is a Prompt?</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">What is a Prompt?</h2>
       <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto">
         A prompt is the instruction or question you give to an AI system. The quality of your prompt determines the quality of your output—prompting is both an art and a science.
       </p>
+      <div class="w-full max-w-3xl mx-auto mt-12 flex flex-col gap-4">
+        <div id="user-prompt-bubble-container" class="flex justify-end opacity-0 transition-all duration-500 transform translate-y-4 min-h-[50px]">
+          <div id="user-prompt-bubble" class="bg-gray-100 shadow-md text-gray-800 p-3 rounded-xl max-w-md"></div>
+        </div>
+        <div id="ai-response-bubble-container" class="flex justify-start opacity-0 transition-all duration-500 transform translate-y-4 min-h-[50px]">
+          <div id="ai-response-bubble" class="bg-gray-100 shadow-md text-gray-800 p-3 rounded-xl max-w-md">... seriously?</div>
+        </div>
+      </div>
+      <div id="gemini-chatbox" class="w-full max-w-3xl mx-auto mt-6 p-4 rounded-full bg-[#333537] flex items-center">
+        <div class="flex-shrink-0"><img src="assets/gemini-logo.png" alt="Gemini Icon" class="w-6 h-6"></div>
+        <div id="prompt-input-area" class="flex-grow text-left text-gray-400 ml-4">
+          <span id="placeholder-text">Enter a prompt for Gemini</span>
+          <span id="typed-text"></span><span id="typing-cursor" class="opacity-0">|</span>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 4: Example Comparison -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-12" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">Prompt Example</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-4xl">
-        <div>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Prompt Example</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
+        <div class="flex flex-col">
           <div class="text-flash-black text-xl font-light mb-2">Basic Prompt</div>
-          <div class="bg-gray-100 p-6 rounded-xl shadow-md text-left">
-            "Write about our new product."
+          <div id="s4-basic-bubble-container" class="opacity-0 transition-all duration-500 transform translate-y-4 flex-grow">
+            <div id="s4-basic-bubble" class="bg-gray-100 shadow-md text-gray-800 p-4 rounded-xl max-w-md"></div>
+          </div>
+          <div class="mt-4 p-4 rounded-full bg-[#333537] flex items-center">
+            <div class="flex-shrink-0"><img src="assets/gemini-logo.png" alt="Gemini Icon" class="w-6 h-6"></div>
+            <div id="s4-basic-input-area" class="flex-grow text-left text-gray-400 ml-4">
+              <span id="s4-basic-placeholder">Enter a prompt for Gemini</span>
+              <span id="s4-basic-typed-text"></span><span id="s4-basic-cursor" class="opacity-0">|</span>
+            </div>
           </div>
         </div>
-        <div>
+        <div class="flex flex-col">
           <div class="text-flash-black text-xl font-light mb-2">TCREI Prompt</div>
-          <div class="bg-gray-100 p-6 rounded-xl shadow-md text-left">
-            "You are a technical writer at Flash. Write a brief overview of our new analytics dashboard for a client-facing knowledge base article. Focus on key benefits for enterprise users and include a clear call-to-action for scheduling a demo."
+          <div id="s4-tcrei-bubble-container" class="opacity-0 transition-all duration-500 transform translate-y-4 flex-grow">
+            <div id="s4-tcrei-bubble" class="bg-gray-100 shadow-md text-gray-800 p-4 rounded-xl max-w-md text-left"></div>
+          </div>
+          <div class="mt-4 p-4 rounded-full bg-[#333537] flex items-center">
+            <div class="flex-shrink-0"><img src="assets/gemini-logo.png" alt="Gemini Icon" class="w-6 h-6"></div>
+            <div id="s4-tcrei-input-area" class="flex-grow text-left text-gray-400 ml-4">
+              <span id="s4-tcrei-placeholder">Enter a prompt for Gemini</span>
+              <span id="s4-tcrei-typed-text"></span><span id="s4-tcrei-cursor" class="opacity-0">|</span>
+            </div>
           </div>
         </div>
       </div>
@@ -76,9 +109,8 @@
     <!-- Slide 5: TCREI Framework Overview (Redesigned) -->
     <section class="slide bg-white flex flex-col justify-center p-12 md:p-16" data-theme="light">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-        <!-- Left Column: Title and Description -->
         <div class="flex flex-col justify-center text-center md:text-left">
-          <h2 class="text-flash-black font-bold text-5xl mb-4">The TCREI Framework</h2>
+          <h2 class="text-flash-black font-bold text-5xl mb-8">The TCREI Framework</h2>
           <p class="text-flash-black text-2xl font-light mb-6">
             A systematic approach for getting the best from any AI tool. Click each component to learn more as we walk through them.
           </p>
@@ -112,7 +144,7 @@
 
     <!-- Slide 6: Task -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">Task: Be Clear and Specific</h3>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Task: Be Clear and Specific</h3>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         What exactly do you want the AI to do? Define the role if needed and specify the format. Vague tasks get vague results—specific tasks get useful results.
       </p>
@@ -120,7 +152,7 @@
 
     <!-- Slide 7: Context -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">Context: Set the Stage</h3>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Context: Set the Stage</h3>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         Add background, goals, audience, and constraints. For example: “This client is a mid-size enterprise evaluating multiple solutions and values detailed technical specs.”
       </p>
@@ -128,7 +160,7 @@
 
     <!-- Slide 8: References -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">References: Provide Supporting Info</h3>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">References: Provide Supporting Info</h3>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         Give the AI examples, data, or links to help it generate more accurate and relevant outputs. The more you provide, the more tailored the response.
       </p>
@@ -136,7 +168,7 @@
 
     <!-- Slide 9: Evaluate -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">Evaluate: Check the Output</h3>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Evaluate: Check the Output</h3>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         Review the AI’s response. Does it meet your needs? Is it accurate and actionable? If not, refine your prompt or clarify your requirements.
       </p>
@@ -144,7 +176,7 @@
 
     <!-- Slide 10: Iterate -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-4">Iterate: Refine and Repeat</h3>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Iterate: Refine and Repeat</h3>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         Prompting is an iterative process. Adjust your instructions, add details, or ask follow-up questions to improve the results.
       </p>
@@ -152,7 +184,7 @@
 
     <!-- Slide 11: Advanced Techniques -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-6">Advanced Prompting Techniques</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Advanced Prompting Techniques</h2>
       <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-2xl mx-auto mb-4">
         <li>Chain-of-thought: Ask the AI to reason step by step.</li>
         <li>Role prompting: Assign the AI a persona or expertise.</li>
@@ -162,7 +194,7 @@
 
     <!-- Slide 12: Multimodal Prompts -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-6">Multimodal Prompts</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Multimodal Prompts</h2>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto mb-4">
         Modern AIs can process images, tables, and more. Combine text instructions with visuals or data for richer interactions.
       </p>
@@ -170,7 +202,7 @@
 
     <!-- Slide 13: Common Pitfalls -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-6">Common Pitfalls</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Common Pitfalls</h2>
       <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-2xl mx-auto mb-4">
         <li>Being too vague or too broad</li>
         <li>Forgetting to specify audience or format</li>
@@ -180,7 +212,7 @@
 
     <!-- Slide 14: Use Cases at Flash -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-6">Use Cases at Flash</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Use Cases at Flash</h2>
       <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-2xl mx-auto mb-4">
         <li>Drafting client emails and proposals</li>
         <li>Summarizing research and reports</li>
@@ -188,10 +220,10 @@
         <li>Brainstorming campaign ideas</li>
       </ul>
     </section>
-
+    
     <!-- Slide 15: Key Takeaways -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-6">Key Takeaways</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Key Takeaways</h2>
       <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-2xl mx-auto">
         <li>Mastering prompt engineering is about communicating effectively with AI systems.</li>
         <li>Use the TCREI framework: Task, Context, References, Evaluate, Iterate.</li>
@@ -201,14 +233,13 @@
 
     <!-- Slide 16: Q&A -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-4">Questions?</h2>
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Questions?</h2>
       <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
         Let's discuss how we can put these techniques to work at Flash!
       </p>
     </section>
   </main>
 
-  <!-- Navigation -->
   <button id="nav-left" class="nav-arrow" role="button" aria-label="Previous Slide">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
   </button>

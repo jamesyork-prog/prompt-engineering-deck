@@ -30,16 +30,16 @@ body {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.1); /* Default background */
-  color: rgba(0, 0, 0, 0.4); /* Default color */
-  border-radius: 9999px; /* Added from common styles for arrows */
-  width: 48px; /* Added from common styles for arrows */
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 9999px;
+  width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.5s ease-in-out; /* Be more specific or use 'all' if intended */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.5s ease-in-out;
   z-index: 100;
   border: none;
 }
@@ -62,68 +62,6 @@ body {
   transition: width 0.4s;
 }
 
-.chat-container {
-  max-width: 800px;
-  width: 100%;
-  overflow-y: auto;
-  max-height: 60vh;
-}
-.chat-bubble {
-  background-color: #f0f4f9;
-  border-radius: 20px;
-  padding: 12px 20px;
-  min-height: 48px;
-  word-break: break-word;
-  max-width: 85%;
-}
-.user-message .chat-bubble {
-  background-color: #e8e8e8;
-  border-bottom-right-radius: 4px;
-}
-.ai-message .chat-bubble {
-  border-bottom-left-radius: 4px;
-}
-.typing-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background-color: #000;
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink { from, to { background-color: transparent } 50% { background-color: #000; } }
-
-.tcrei-path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw-line 2s ease-out forwards;
-}
-.tcrei-circle,
-.tcrei-text {
-  opacity: 0;
-  animation: fade-in 1s ease-out forwards;
-}
-@keyframes draw-line { to { stroke-dashoffset: 0; } }
-@keyframes fade-in { to { opacity: 1; } }
-
-.clear-button {
-  background-color: #f87171;
-  color: white;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  margin-top: 1rem;
-  cursor: pointer;
-  border: none;
-}
-.clear-button:hover {
-  background-color: #ef4444;
-}
-
-@media (max-width: 800px) {
-  .chat-container { max-width: 100vw; }
-  .slide { padding: 1rem !important; }
-}
-
 .nav-arrow.nav-arrow-hidden {
   opacity: 0;
   pointer-events: none;
@@ -132,47 +70,12 @@ body {
   cursor: none !important;
 }
 
-/* ---- TCREI Tabs ---- */
-.tcrei-tabs button {
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-weight: 500;
-  transition: background-color 0.3s, color 0.3s;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-.tcrei-tabs button.active {
-  background-color: #FF555E;
-  color: #ffffff;
-}
-.tcrei-content {
-  position: relative;
-  height: 8rem;
-  margin-top: 1.5rem;
-}
-.tcrei-pane {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateX(1rem);
-  transition: opacity 0.4s, transform 0.4s;
-}
-.tcrei-pane.active {
-  opacity: 1;
-  transform: translateX(0);
-}
-
 /* ---- Fully Updated Logo Carousel Styles ---- */
-
-/* This is the visible window with faded edges. */
 .logo-carousel {
   width: 100%;
-  max-width: 80vw;
+  max-width: 60vw;
   overflow: hidden;
   position: relative;
-  /* This value pushes the carousel down from the text above it. */
-  /* You can adjust this value (e.g., 4rem, 8rem) to fine-tune the position. */
   margin-top: 6rem;
 }
 
@@ -196,15 +99,12 @@ body {
   background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
 }
 
-/* This is the parent container that gets animated. */
 .logo-track {
   display: flex;
   width: fit-content;
-  /* You can adjust the speed of the carousel here (e.g., 20s for faster). */
   animation: scroll 40s linear infinite;
 }
 
-/* This container holds one complete set of logos. */
 .logo-set {
   display: flex;
   align-items: center;
@@ -213,21 +113,55 @@ body {
   padding-right: 4rem;
 }
 
-/* This styles the individual logo images. */
 .logo-item {
-  /* This single line ensures all logos have a uniform height. */
-  /* Adjust this value (e.g., 50px, 70px) to change the logo size. */
-  height: 60px;
+  height: 30px;
   width: auto;
-  object-fit: contain; /* This prevents the logos from stretching or distorting. */
+  object-fit: contain;
 }
 
-/* The animation for the seamless scroll. */
 @keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.logo-openai { height: 55px; }
+.logo-gemini { height: 48px; }
+.logo-notebook { height: 20px; }
+
+/* ---- Gemini Chatbox Animation Styles ---- */
+#typing-cursor,
+#s4-basic-cursor,
+#s4-tcrei-cursor {
+  display: inline-block;
+  font-weight: 300;
+  color: #aeb0b2;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+#user-prompt-bubble-container, 
+#ai-response-bubble-container {
+  min-height: 50px;
+}
+
+#s4-basic-bubble,
+#s4-tcrei-bubble {
+  margin-left: auto;
+}
+
+#s4-basic-typed-text,
+#s4-tcrei-typed-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* --- THE FINAL FIX --- */
+#prompt-input-area,
+#s4-basic-input-area,
+#s4-tcrei-input-area {
+  min-width: 0; /* This forces text wrapping inside a flex-grow element */
 }
