@@ -1,4 +1,4 @@
-// /Users/james.york/Documents/GitHub/prompt-engineering-deck/tailwind.config.js
+// /Users/james.york/WebstormProjects/prompt-engineering-deck/tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,11 +9,14 @@ module.exports = {
   theme: {
     extend: {
       // You can extend Tailwind's default theme here
-      // For example, if you had custom colors in your main.css like text-flash-coral,
-      // you might define them here for consistency and to leverage Tailwind's utilities:
       colors: {
         'flash-coral': '#FF555E',
-        'flash-black': '#000000',
+        'flash-black': '#000000', // Note: Tailwind's default 'black' is #000000. You might not need to redefine this unless you intend to override it.
+      },
+      fontFamily: {
+        sans: ['Outfit', 'sans-serif'], // Added 'Outfit' with a generic 'sans-serif' fallback
+        // You could also add other font families here if needed, e.g.:
+        // serif: ['Merriweather', 'serif'],
       },
     },
   },

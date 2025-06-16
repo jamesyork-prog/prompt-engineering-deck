@@ -10,7 +10,7 @@
 <body>
   <!-- Progress Bar -->
   <div class="progress-bar-bg">
-    <div id="progress-bar" class="progress-bar" style="width:0%"></div>
+    <div id="progress-bar" class="progress-bar" style="width:0"></div>
   </div>
 
   <main class="relative w-full h-screen">
@@ -156,18 +156,75 @@
 
     <!-- Slide 6: Task -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-8">Task: Be Clear and Specific</h3>
-      <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
-        What exactly do you want the AI to do? Define the role if needed and specify the format. Vague tasks get vague results—specific tasks get useful results.
-      </p>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Let's break down a strong <span class="text-flash-coral">Task</span></h3>
+
+      <div class="relative w-full max-w-3xl mx-auto mt-12">
+
+        <div id="s6-prompt-bubble-container" class="opacity-0 transition-all duration-500 transform translate-y-4 min-h-[220px] relative bg-gray-100 shadow-md text-gray-800 p-6 rounded-xl text-left">
+
+          <p id="s6-prompt-text" class="text-lg leading-relaxed"></p>
+
+          <div id="s6-callouts-container">
+            <svg width="0" height="0" style="position:absolute;">
+              <defs>
+                <marker id="arrowhead-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3257c9" /></marker>
+                <marker id="arrowhead-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffdf2b" /></marker>
+                <marker id="arrowhead-coral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#FF555E" /></marker>
+              </defs>
+            </svg>
+            <div id="s6-callout-persona" class="s6-callout"><img src="assets/callout-persona.svg" alt="Persona Callout"></div>
+            <div id="s6-callout-task" class="s6-callout"><img src="assets/callout-task.svg" alt="Task Callout"></div>
+            <div id="s6-callout-format" class="s6-callout"><img src="assets/callout-format.svg" alt="Format Callout"></div>
+          </div>
+
+        </div>
+
+        <div id="s6-gemini-chatbox" class="w-full mt-6 p-4 rounded-full bg-[#333537] flex items-center">
+          <div class="flex-shrink-0"><img src="assets/gemini-logo.png" alt="Gemini Icon" class="w-6 h-6"></div>
+          <div id="s6-input-area" class="flex-grow text-left text-gray-400 ml-4">
+            <span id="s6-placeholder-text">Enter a prompt for Gemini</span>
+            <span id="s6-typed-text"></span><span id="s6-cursor" class="opacity-0">|</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 7: Context -->
     <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h3 class="text-flash-black font-bold text-4xl mb-8">Context: Set the Stage</h3>
-      <p class="text-flash-black text-2xl font-light max-w-2xl mx-auto">
-        Add background, goals, audience, and constraints. For example: “This client is a mid-size enterprise evaluating multiple solutions and values detailed technical specs.”
-      </p>
+      <h3 class="text-flash-black font-bold text-4xl mb-8">Now let's add <span class="text-flash-coral">Context</span></h3>
+
+      <div class="relative w-full max-w-3xl mx-auto mt-12">
+        <div id="s7-prompt-bubble-container" class="min-h-[260px] relative bg-gray-100 shadow-md text-gray-800 p-6 rounded-xl text-left">
+          <p id="s7-prompt-text" class="text-lg leading-relaxed">
+            <span class="s7-persona">You are a Project Manager at Flash with deep technical knowledge of the Flash Vision LPR (License Plate Recognition) system.</span>
+            <span class="s7-task">Provide a comprehensive technical response detailing how we implement Flash Vision LPR for clients.</span>
+            <span id="s7-context-insertion" class="font-semibold transition-opacity duration-500 opacity-0"></span>
+            <span class="s7-format">Deliver your response as a professional, client-ready Markdown document that can be downloaded and shared.</span>
+          </p>
+
+          <div id="s7-callouts-container">
+            <svg width="0" height="0" style="position:absolute;">
+              <defs>
+                <marker id="s7-arrowhead-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3257c9" /></marker>
+                <marker id="s7-arrowhead-yellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#ffdf2b" /></marker>
+                <marker id="s7-arrowhead-coral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#FF555E" /></marker>
+              </defs>
+            </svg>
+
+            <div id="s7-callout-audience" class="s6-callout callout-blue"><img src="assets/callout-audience.svg" alt="Audience Callout"></div>
+            <div id="s7-callout-goal" class="s6-callout callout-yellow"><img src="assets/callout-goal.svg" alt="Goal Callout"></div>
+            <div id="s7-callout-constraints" class="s6-callout callout-coral"><img src="assets/callout-constraints.svg" alt="Constraints Callout"></div>
+          </div>
+        </div>
+
+        <div id="s7-gemini-chatbox" class="w-full mt-6 p-4 rounded-full bg-[#333537] flex items-center">
+          <div class="flex-shrink-0"><img src="assets/gemini-logo.png" alt="Gemini Icon" class="w-6 h-6"></div>
+          <div id="s7-input-area" class="flex-grow text-left text-gray-400 ml-4">
+            <span id="s7-placeholder">Enter a prompt for Gemini</span>
+            <span id="s7-typed-text"></span><span id="s7-cursor" class="opacity-0">|</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 8: References -->

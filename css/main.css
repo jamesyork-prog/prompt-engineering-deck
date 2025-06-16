@@ -1,4 +1,4 @@
-/* main.css */
+/* main.css - Final Definitive Version */
 @import "tailwindcss";
 
 body {
@@ -70,7 +70,7 @@ body {
   cursor: none !important;
 }
 
-/* ---- Fully Updated Logo Carousel Styles ---- */
+/* Logo Carousel Styles */
 .logo-carousel {
   width: 100%;
   max-width: 60vw;
@@ -78,7 +78,6 @@ body {
   position: relative;
   margin-top: 6rem;
 }
-
 .logo-carousel::before,
 .logo-carousel::after {
   content: '';
@@ -88,23 +87,19 @@ body {
   height: 100%;
   z-index: 2;
 }
-
 .logo-carousel::before {
   left: 0;
   background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
 }
-
 .logo-carousel::after {
   right: 0;
   background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
 }
-
 .logo-track {
   display: flex;
   width: fit-content;
   animation: scroll 40s linear infinite;
 }
-
 .logo-set {
   display: flex;
   align-items: center;
@@ -112,90 +107,61 @@ body {
   flex-shrink: 0;
   padding-right: 4rem;
 }
-
 .logo-item {
   height: 30px;
   width: auto;
   object-fit: contain;
 }
-
 @keyframes scroll {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-
 .logo-openai { height: 55px; }
 .logo-gemini { height: 48px; }
 .logo-notebook { height: 20px; }
 
-/* ---- Gemini Chatbox Animation Styles ---- */
+/* Chatbox Animation Styles */
 #typing-cursor,
-#s4-basic-cursor,
-#s4-tcrei-cursor {
+#s4-basic-cursor, #s4-tcrei-cursor,
+#s6-cursor, #s7-cursor {
   display: inline-block;
   font-weight: 300;
   color: #aeb0b2;
   animation: blink-cursor 1s step-end infinite;
 }
-
 @keyframes blink-cursor {
   from, to { opacity: 1; }
   50% { opacity: 0; }
 }
-
-#user-prompt-bubble-container, 
-#ai-response-bubble-container {
-  min-height: 50px;
+#user-prompt-bubble-container, #ai-response-bubble-container { min-height: 50px; }
+#s4-basic-typed-text, #s4-tcrei-typed-text { white-space: pre-wrap; word-break: break-word; }
+#prompt-input-area, #s4-basic-input-area, #s4-tcrei-input-area, #s6-input-area, #s7-input-area {
+  min-width: 0;
 }
 
-#s4-basic-bubble,
-#s4-tcrei-bubble {
-  margin-left: auto;
-}
-
-#s4-basic-typed-text,
-#s4-tcrei-typed-text {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-/* --- THE FINAL FIX --- */
-#prompt-input-area,
-#s4-basic-input-area,
-#s4-tcrei-input-area {
-  min-width: 0; /* This forces text wrapping inside a flex-grow element */
-}
-
-/* ---- TCREI Animated Flow Chart Styles (v2 - Polished) ---- */
-
-/* "Frosted Glass" effect for the boxes */
+/* TCREI Flowchart Styles */
 .flow-box rect {
-  fill: rgba(243, 244, 246, 0.7); /* Semi-transparent bg-gray-100 */
-  stroke: rgba(255, 255, 255, 0.5); /* Semi-transparent white border */
+  fill: rgba(243, 244, 246, 0.7);
+  stroke: rgba(255, 255, 255, 0.5);
   stroke-width: 1;
-  -webkit-backdrop-filter: blur(10px); /* Safari */
-  backdrop-filter: blur(10px); /* Standard */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
-
 .flow-box text {
   text-anchor: middle;
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
   font-size: 20px;
-  fill: #1f2937; /* A darker gray for better contrast on the blur */
+  fill: #1f2937;
 }
-
-/* Glowing effect for the arrows */
 .flow-arrow {
-  stroke: #FF555E; /* Flash Coral */
+  stroke: #FF555E;
   stroke-width: 3;
   fill: none;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  /* The drop-shadow filter creates the glow effect */
   filter: drop-shadow(0 0 5px rgba(255, 85, 94, 0.7));
 }
-
 .flow-text {
   text-anchor: middle;
   font-family: 'Outfit', sans-serif;
@@ -204,43 +170,17 @@ body {
   fill: #FF555E;
   filter: drop-shadow(0 0 5px rgba(255, 85, 94, 0.7));
 }
-
-/* --- Animation Trigger & Sequencing --- */
-
-/* Initially, all animated parts are invisible */
-#tcrei-flowchart .flow-box,
-#tcrei-flowchart .flow-text,
-#tcrei-flowchart .flow-arrow { /* Added .flow-arrow here */
+#tcrei-flowchart .flow-box, #tcrei-flowchart .flow-text, #tcrei-flowchart .flow-arrow {
   opacity: 0;
 }
-
-/* When the parent SVG gets the 'start-animation' class, the animations begin */
-#tcrei-flowchart.start-animation .flow-box,
-#tcrei-flowchart.start-animation .flow-text {
+#tcrei-flowchart.start-animation .flow-box, #tcrei-flowchart.start-animation .flow-text {
   animation: fade-in 0.5s ease-out forwards;
 }
-
 #tcrei-flowchart.start-animation .flow-arrow {
-  /* Run two animations at once: one to draw, one to fade in */
-  animation: 
-    draw-line 0.8s ease-in-out forwards,
-    fade-in 0.2s ease-out forwards; /* The arrowhead fix */
+  animation: draw-line 0.8s ease-in-out forwards, fade-in 0.2s ease-out forwards;
 }
-
-/* Keyframes for the animations */
-@keyframes draw-line {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Animation Delays for Sequencing (No changes here, but kept for completeness) */
+@keyframes draw-line { to { stroke-dashoffset: 0; } }
+@keyframes fade-in { to { opacity: 1; } }
 #tcrei-flowchart.start-animation #flow-box-task { animation-delay: 0s; }
 #tcrei-flowchart.start-animation #flow-arrow-1 { animation-delay: 0.3s; }
 #tcrei-flowchart.start-animation #flow-box-context { animation-delay: 0.8s; }
@@ -250,3 +190,56 @@ body {
 #tcrei-flowchart.start-animation #flow-box-evaluate { animation-delay: 2.4s; }
 #tcrei-flowchart.start-animation #flow-arrow-iterate { animation-delay: 2.7s; }
 #tcrei-flowchart.start-animation #flow-text-iterate { animation-delay: 3.2s; }
+
+/* ---- Slide 6 & 7 Highlighting Styles (Final Corrected Version) ---- */
+
+.prompt-highlight {
+  border-bottom: 2px solid;
+  padding-bottom: 1px;
+}
+
+#s6-callouts-container, #s7-callouts-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Individual callout group styling */
+.s6-callout {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+  position: absolute;
+  top: var(--top);
+  left: var(--left, auto);
+  right: var(--right, auto);
+
+  /* THIS IS THE DEFINITIVE FIX FOR THE SHRINKING PROBLEM */
+  width: 160px;
+  height: auto;
+}
+
+.s6-callout img {
+  width: 100%; /* Make the SVG image fill its correctly-sized container */
+}
+
+.s6-callout.visible {
+  opacity: 1;
+}
+
+/* --- Positioning Variables --- */
+#s6-callout-persona { --top: -55px; --left: 120px; }
+#s6-callout-task { --top: 63px; --left: -143px; }
+#s6-callout-format { --top: 94px; --right: -113px; }
+
+#s7-callout-audience { --top: 60px; --left: 751px; }
+#s7-callout-goal { --top: 120px; --left: -149px; }
+#s7-callout-constraints { --top: 192px; --right: -143px; }
+
+
+/* --- Color Classes --- */
+.prompt-highlight.highlight-blue { border-color: #3257c9; }
+.prompt-highlight.highlight-yellow { border-color: #ffdf2b; }
+.prompt-highlight.highlight-coral { border-color: #FF555E; }
