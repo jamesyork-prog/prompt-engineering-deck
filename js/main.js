@@ -188,11 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (placeholder) placeholder.style.display = 'none';
         if (cursor) cursor.classList.remove('opacity-0');
         let i = 0;
-        function typeWriter() {
+        function typeWriterSlide3() {
           if (i < promptToType.length) {
             typedTextEl.textContent += promptToType.charAt(i);
             i++;
-            setTimeout(typeWriter, 80);
+            setTimeout(typeWriterSlide3, 80);
           } else {
             if (cursor) cursor.style.display = 'none';
             setTimeout(() => {
@@ -208,11 +208,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
           }
         }
-        typeWriter();
+        typeWriterSlide3();
       }
 
       if (slide4 && slide4.classList.contains('active')) {
-        const typeWriter = (elements, textToType, callback) => {
+        const typeWriterSlide4 = (elements, textToType, callback) => {
           const { placeholder, typedText, cursor, bubble, bubbleContainer } = elements;
           if (placeholder) placeholder.style.display = 'none';
           if (cursor) cursor.classList.remove('opacity-0');
@@ -240,26 +240,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (s4_anim_step === 0) {
           s4_anim_step = 0.5;
-          const elements = {
+          const basicElements = {
             placeholder: document.getElementById('s4-basic-placeholder'),
             typedText: document.getElementById('s4-basic-typed-text'),
             cursor: document.getElementById('s4-basic-cursor'),
             bubble: document.getElementById('s4-basic-bubble'),
             bubbleContainer: document.getElementById('s4-basic-bubble-container')
           };
-          const textToType = '"Write about our new product."';
-          typeWriter(elements, textToType, () => { s4_anim_step = 1; });
+          const basicText = '"Write about our new product."';
+          typeWriterSlide4(basicElements, basicText, () => { s4_anim_step = 1; });
         } else if (s4_anim_step === 1) {
           s4_anim_step = 1.5;
-          const elements = {
+          const tcreiElements = {
             placeholder: document.getElementById('s4-tcrei-placeholder'),
             typedText: document.getElementById('s4-tcrei-typed-text'),
             cursor: document.getElementById('s4-tcrei-cursor'),
             bubble: document.getElementById('s4-tcrei-bubble'),
             bubbleContainer: document.getElementById('s4-tcrei-bubble-container')
           };
-          const textToType = '"You are a technical writer at Flash. Write a brief overview of our new analytics dashboard for a client-facing knowledge base article. Focus on key benefits for enterprise users and include a clear call-to-action for scheduling a demo."';
-          typeWriter(elements, textToType, () => { s4_anim_step = 2; });
+          const tcreiText = '"You are a technical writer at Flash. Write a brief overview of our new analytics dashboard for a client-facing knowledge base article. Focus on key benefits for enterprise users and include a clear call-to-action for scheduling a demo."';
+          typeWriterSlide4(tcreiElements, tcreiText, () => { s4_anim_step = 2; });
         }
       }
     }
