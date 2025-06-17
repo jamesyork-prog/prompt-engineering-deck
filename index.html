@@ -396,38 +396,125 @@
     </section>
 
     <!-- Slide 12: Common Pitfalls -->
-    <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-8">When Prompts Don't Work</h2>
-      <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-8">
-        If a prompt isn't giving you what you need, remember that failure is just feedback. Adjust and try again.
+    <section class="slide bg-white flex flex-col justify-center items-center text-center p-12 md:p-16" data-theme="light">
+      <h2 class="text-flash-black font-bold text-5xl mb-4">Four Refinement Strategies</h2>
+      <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-12">
+        When a prompt isn't giving you what you need, try one of these four approaches.
       </p>
-      <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-3xl mx-auto text-left space-y-4">
-        <li><strong>Revisit TCREI:</strong> Are you missing context? Is your task specific enough?</li>
-        <li><strong>Break it Down:</strong> Make the task smaller. Instead of "write an overview," try "write a summary of security features."</li>
-        <li><strong>Try an Analogy:</strong> Rephrase your request. "Explain this like I'm a new employee."</li>
-        <li><strong>Add Constraints:</strong> Be more explicit. "Keep it under 200 words" or "Avoid technical jargon."</li>
-      </ul>
+
+      <div class="s12-grid-container">
+        <div class="s12-strategy-card">
+          <div class="s12-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+          </div>
+          <h3 class="s12-title">1. Revisit TCREI</h3>
+          <p class="s12-description">Are you missing context? Is your task specific enough? Re-check the fundamentals first.</p>
+        </div>
+
+        <div class="s12-strategy-card">
+          <div class="s12-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg>
+          </div>
+          <h3 class="s12-title">2. Break It Down</h3>
+          <p class="s12-description">Make the task smaller or more specific. Instead of "write a product overview," try "write a two-paragraph summary focusing on security features."</p>
+        </div>
+
+        <div class="s12-strategy-card">
+          <div class="s12-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.17 48.17 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+            </svg>
+          </div>
+          <h3 class="s12-title">3. Try an Analogy</h3>
+          <p class="s12-description">Rephrase your request using a different context, like "Explain this like I'm a new employee," or "Write this as if it's for our FAQ."</p>
+        </div>
+        
+        <div class="s12-strategy-card">
+          <div class="s12-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0M3.75 18H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" /></svg>
+          </div>
+          <h3 class="s12-title">4. Add Constraints</h3>
+          <p class="s12-description">Be more explicit about what you want or don't want. For example: "Keep it under 200 words," or "Avoid using technical jargon."</p>
+        </div>
+      </div>
+
+      <p class="text-flash-black text-xl italic font-light mt-12">
+        Remember, if a prompt fails, that's feedback. Adjust and try again.
+      </p>
     </section>
 
     <!-- Slide 13: Use Cases at Flash -->
-    <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-8">High-Impact Use Cases at Flash</h2>
-      <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-3xl mx-auto text-left space-y-4">
-        <li><strong>Technical Documentation:</strong> Draft API guides, create user manuals, or generate code comments.</li>
-        <li><strong>Product Launch Support:</strong> Generate product descriptions, create FAQ sections, or brainstorm feature names.</li>
-        <li><strong>Client Communication:</strong> Draft follow-up emails, create proposal outlines, or generate meeting summaries.</li>
-        <li><strong>Analysis and Research:</strong> Summarize market research, analyze competitor information, or simplify complex topics.</li>
-      </ul>
+    <section class="slide bg-white flex flex-col justify-center items-center text-center p-12 md:p-16" data-theme="light">
+      <h2 class="text-flash-black font-bold text-5xl mb-4">Using AI Responsibly at Flash</h2>
+      <p class="text-flash-black text-2xl font-light max-w-4xl mx-auto mb-12">
+        With these powerful tools comes responsibility. Let's talk about using AI effectively and safely in our work environment.
+      </p>
+
+      <div class="s13-grid-container">
+        <div class="s13-card">
+          <div class="s13-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+          </div>
+          <h3 class="s13-title">Data Security</h3>
+          <p class="s13-description">Never put sensitive or confidential information into public AI models. Use our internal tools for sensitive work.</p>
+        </div>
+
+        <div class="s13-card">
+          <div class="s13-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>
+          </div>
+          <h3 class="s13-title">Bias & Hallucinations</h3>
+          <p class="s13-description">AI can be confidently wrong. Always fact-check critical outputs, especially for client-facing content or technical specifications.</p>
+        </div>
+
+        <div class="s13-card">
+          <div class="s13-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+          </div>
+          <h3 class="s13-title">Company Guidelines</h3>
+          <p class="s13-description">Make sure you're familiar with Flash's AI usage policies. When in doubt, always ask first.</p>
+        </div>
+        
+        <div class="s13-card">
+          <div class="s13-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+          </div>
+          <h3 class="s13-title">Human-in-the-Loop</h3>
+          <p class="s13-description">Keep yourself in the review and decision-making process. AI should augment your judgment, not replace it.</p>
+        </div>
+      </div>
+
+      <p class="text-flash-black text-xl italic font-light mt-12">
+        Sometimes, the best decision is not to use AI - especially for high-stakes or regulated content.
+      </p>
     </section>
 
     <!-- Slide 14: Key Takeaways -->
-    <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-8">Key Takeaways</h2>
-      <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-3xl mx-auto text-left space-y-6">
-        <li>Mastering prompt engineering is about learning to communicate effectively with AI systems. It's a skill that will multiply your impact.</li>
-        <li>Remember the TCREI framework: <strong>Task, Context, References, Evaluate, Iterate.</strong></li>
-        <li>Start with simple use cases—client emails, documentation drafts—and build confidence before moving to more complex applications.</li>
-      </ul>
+    <section class="slide bg-white flex flex-col justify-center items-center text-center p-12 md:p-16" data-theme="light">
+      <h2 class="text-flash-black font-bold text-5xl mb-12">Key Takeaways</h2>
+      
+      <div class="w-full max-w-3xl space-y-6">
+        <div class="takeaway-card">
+          <div class="takeaway-number">1</div>
+          <p class="takeaway-text">
+            Mastering prompt engineering is about learning to <strong>communicate effectively</strong> with AI systems. It's a skill that will multiply your impact at Flash.
+          </p>
+        </div>
+        
+        <div class="takeaway-card">
+          <div class="takeaway-number">2</div>
+          <p class="takeaway-text">
+            Remember the TCREI framework: <strong>Task, Context, References, Evaluate, Iterate.</strong> This is your foundation for quality results.
+          </p>
+        </div>
+        
+        <div class="takeaway-card">
+          <div class="takeaway-number">3</div>
+          <p class="takeaway-text">
+            <strong>Start with simple use cases</strong> like emails and drafts. Build confidence, then move to more complex applications.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 15: Q&A -->
