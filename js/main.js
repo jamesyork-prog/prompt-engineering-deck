@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navRight = document.getElementById('nav-right');
   const navArrows = document.querySelectorAll('.nav-arrow');
   let currentSlide = 0;
-  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0;
+  // Merged state variables into one line
+  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0, s8_anim_triggered = false;
 
   // SVG Icon strings
   const SVG_ARROW_LEFT_DARK = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
@@ -130,6 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typedText) typedText.textContent = '';
   }
 
+  // New reset function for slide 8, correctly placed
+  function resetSlide8Animation() {
+    s8_anim_triggered = false;
+    document.querySelectorAll('#s8-reference-grid .reference-card').forEach(card => {
+      card.classList.remove('animate-in');
+    });
+  }
+
   function updateProgressBar() {
     const percent = slides.length > 1 ? ((currentSlide) / (slides.length - 1)) * 100 : 0;
     if (progressBar) progressBar.style.width = percent + '%';
@@ -156,19 +165,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const resetFunctions = {
         1: resetSlide2QuoteAnimation, 2: resetSlide3ChatAnimation,
         3: resetSlide4ChatAnimation, 4: resetSlide5FlowchartAnimation,
-        5: resetSlide6Animation, 6: resetSlide7Animation
+        5: resetSlide6Animation, 6: resetSlide7Animation, // Corrected missing comma
+        7: resetSlide8Animation
       };
       const resetFunction = resetFunctions[oldIndex];
       if (resetFunction) resetFunction();
     }
+    
     currentSlide = newIndex;
+    
+    // Trigger animation for slide 5 (TCREI flowchart)
     if (currentSlide === 4) {
       const flowchart = document.getElementById('tcrei-flowchart');
       setTimeout(() => { if (flowchart) flowchart.classList.add('start-animation'); }, 100);
     }
+
+    // Trigger animation for slide 8 (Reference Grid)
+    if (currentSlide === 7 && !s8_anim_triggered) {
+      s8_anim_triggered = true;
+      const cards = document.querySelectorAll('#s8-reference-grid .reference-card');
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('animate-in');
+        }, index * 100); // 100ms stagger effect
+      });
+    }
+
     slides.forEach((slide, index) => {
       slide.classList.toggle('active', index === currentSlide);
     });
+
     if (slides[currentSlide]) {
       updateNavTheme(slides[currentSlide]);
     }
