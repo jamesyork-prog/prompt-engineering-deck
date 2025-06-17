@@ -389,3 +389,78 @@ body {
 .s10-user-icon {
   color: #FF555E;
 }
+
+/* ---- Slide 11: Interactive Tabs Styles (Corrected) ---- */
+#s11-tab-container {
+  display: flex;
+  width: 100%;
+  max-width: 100%; /* Changed from max-w-3xl to allow full width */
+  border-bottom: 2px solid #e5e7eb; /* gray-200 */
+}
+
+.s11-tab-button {
+  flex-grow: 1;
+  padding: 1rem 0.5rem;
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600;
+  color: #6b7280; /* gray-500 */
+  background-color: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: -2px; /* Overlap the container's border */
+  cursor: pointer;
+}
+
+.s11-tab-button:hover {
+  background-color: #f9fafb; /* gray-50 */
+  color: #111827; /* gray-900 */
+}
+
+.s11-tab-button.active {
+  color: #FF555E; /* flash-coral */
+  border-bottom-color: #FF555E;
+}
+
+#s11-content-container {
+  padding-top: 1.5rem;
+  width: 100%;
+  max-width: 48rem; /* Increased width for content */
+}
+
+.s11-content-pane {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  pointer-events: none;
+}
+
+.s11-content-pane.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.s11-content-title {
+  font-size: 1.75rem; /* ~28px */
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.s11-content-description {
+  font-size: 1.25rem; /* text-xl */
+  color: #4b5563; /* gray-600 */
+  line-height: 1.6;
+}
+
+.s11-example {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #f3f4f6;
+  font-size: 1.125rem;
+}

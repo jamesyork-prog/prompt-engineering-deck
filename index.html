@@ -344,17 +344,55 @@
       </p>
     </section>
 
-    <!-- Slide 11: Multimodal Prompts -->
-    <section class="slide bg-white flex flex-col justify-center items-center text-center p-16" data-theme="light">
-      <h2 class="text-flash-black font-bold text-5xl mb-8">Multimodal Prompts: Beyond Text</h2>
-        <p class="text-flash-black text-2xl font-light max-w-3xl mx-auto mb-8">
-            Modern AI isn't limited to just text. You can use images, documents, and code snippets in your prompts.
-        </p>
-      <ul class="text-flash-black text-2xl font-light list-disc list-inside max-w-3xl mx-auto text-left space-y-4">
-        <li><strong>Document Analysis:</strong> Upload a PDF and ask the AI to summarize key requirements or identify challenges.</li>
-        <li><strong>Screenshot Analysis:</strong> Share a screenshot of an interface and ask the AI to write user-friendly help text.</li>
-        <li><strong>Code Review:</strong> Paste a code snippet and ask for security reviews or efficiency improvements.</li>
-      </ul>
+    <!-- Slide 11: Advanced -->
+    <section class="slide bg-white flex flex-col justify-center items-center text-center p-12 md:p-16" data-theme="light">
+      <h2 class="text-flash-black font-bold text-5xl mb-8">Advanced Prompting Techniques</h2>
+      
+      <div id="s11-tab-container" class="flex w-full max-w-3xl border-b border-gray-200">
+        <button class="s11-tab-button active" data-tab="1">Prompt Chaining</button>
+        <button class="s11-tab-button" data-tab="2">Chain-of-Thought</button>
+        <button class="s11-tab-button" data-tab="3">Tree-of-Thought</button>
+        <button class="s11-tab-button" data-tab="4">Meta-Prompting</button>
+      </div>
+
+      <div id="s11-content-container" class="w-full max-w-3xl mt-8 text-left h-64 relative">
+        <div class="s11-content-pane active" data-pane="1">
+          <h3 class="s11-content-title">Break complex tasks into smaller, sequential steps.</h3>
+          <p class="s11-content-description">Instead of one giant prompt, guide the AI through a multi-step process. Each step builds on the previous one, giving you more control and better results.</p>
+          <div class="s11-example">
+            <strong>Example:</strong> Instead of "Create a launch plan," you would chain:
+            <ol class="list-decimal list-inside ml-4 mt-2">
+              <li>"First, identify key market segments for our new product."</li>
+              <li>"Then, develop targeted messaging for each of those segments."</li>
+              <li>"Finally, create a detailed project timeline based on that messaging."</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="s11-content-pane" data-pane="2">
+          <h3 class="s11-content-title">Ask the AI to explain its reasoning step-by-step.</h3>
+          <p class="s11-content-description">Simply add the phrase "Let's think through this step by step" to your prompt. This forces the AI to show its work, which is invaluable for analysis, problem-solving, and catching logical errors early.</p>
+          <div class="s11-example">
+            <strong>Example Prompt:</strong> "A user is getting error 404 on their profile page after changing their username. Let's think through this step by step to find the likely cause."
+          </div>
+        </div>
+
+        <div class="s11-content-pane" data-pane="3">
+          <h3 class="s11-content-title">Have the AI explore multiple different approaches in parallel.</h3>
+          <p class="s11-content-description">This is useful when you want to compare options instead of committing to a single path. Ask the AI to evaluate different solutions and list the pros and cons for each.</p>
+          <div class="s11-example">
+            <strong>Example Prompt:</strong> "Give me three different approaches to organizing our technical documentation, with pros and cons for each."
+          </div>
+        </div>
+
+        <div class="s11-content-pane" data-pane="4">
+          <h3 class="s11-content-title">Ask the AI to help you write a better prompt.</h3>
+          <p class="s11-content-description">The AI knows what information it needs to perform a task well. You can leverage this by asking it to act as a prompt engineer.</p>
+          <div class="s11-example">
+            <strong>Example Prompt:</strong> "You are an expert prompt engineer. Help me write a prompt to generate technical specifications for our API documentation."
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Slide 12: Common Pitfalls -->
