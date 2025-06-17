@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navRight = document.getElementById('nav-right');
   const navArrows = document.querySelectorAll('.nav-arrow');
   let currentSlide = 0;
-  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0, s8_anim_triggered = false, s9_anim_step = 0;
+  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0, s8_anim_triggered = false, s9_anim_step = 0, s11_initialized = false;
   let s9_delay_timer = null; // Timer for slide 9 animation
 
   // SVG Icon strings
@@ -139,85 +139,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // FIXED: Restored the full, comprehensive reset function for slide 9.
-  // This is crucial to hide the slide's elements when you navigate away.
   function resetSlide9Animation() {
     s9_anim_step = 0;
     if (s9_delay_timer) clearTimeout(s9_delay_timer);
-
-    const placeholder = document.getElementById('s9-placeholder');
-    const typedText = document.getElementById('s9-typed-text');
-    const cursor = document.getElementById('s9-cursor');
-    const userBubble = document.getElementById('s9-user-bubble');
-    const userBubbleContainer = document.getElementById('s9-user-bubble-container');
-    const aiBubbleContainer = document.getElementById('s9-ai-bubble-container');
-    const incorrectAnswer = document.getElementById('s9-incorrect-answer');
-
-    if (placeholder) placeholder.textContent = '';
-    if (typedText) typedText.textContent = '';
-    if (cursor) cursor.classList.add('opacity-0');
-    if (userBubble) userBubble.textContent = '';
-    if (userBubbleContainer) userBubbleContainer.classList.add('opacity-0', 'translate-y-4');
-    if (aiBubbleContainer) aiBubbleContainer.classList.add('opacity-0', 'translate-y-4');
-    if (incorrectAnswer) {
-      incorrectAnswer.textContent = 'Mars';
-      incorrectAnswer.classList.remove('highlight');
-    }
   }
   
-  // A new standalone function to handle the complex animation for slide 9.
-  function triggerSlide9Animation() {
-      // Set the initial state of the slide every time it's triggered
-      const placeholder = document.getElementById('s9-placeholder');
-      if (placeholder) {
-          placeholder.textContent = 'Enter a prompt for Gemini';
-          placeholder.style.display = 'inline';
-      }
-
-      // Only start the timer-based animation if it hasn't already run
-      if (s9_anim_step === 0) {
-        s9_anim_step = 1; // Mark as started
-        s9_delay_timer = setTimeout(() => {
-          const typedTextEl = document.getElementById('s9-typed-text');
-          const cursor = document.getElementById('s9-cursor');
-          const userBubble = document.getElementById('s9-user-bubble');
-          const userBubbleContainer = document.getElementById('s9-user-bubble-container');
-          const aiBubbleContainer = document.getElementById('s9-ai-bubble-container');
-          const promptToType = "What is the third planet from the sun?";
-          
-          if (placeholder) placeholder.style.display = 'none';
-          if (cursor) cursor.classList.remove('opacity-0');
-          
-          let i = 0;
-          function typeWriter() {
-            if (i < promptToType.length) {
-              if(typedTextEl) typedTextEl.textContent += promptToType.charAt(i);
-              i++;
-              setTimeout(typeWriter, 50);
-            } else {
-              if (cursor) cursor.style.display = 'none';
-              setTimeout(() => {
-                if(typedTextEl) typedTextEl.textContent = '';
-                if (placeholder) {
-                  placeholder.textContent = 'Enter a prompt for Gemini';
-                  placeholder.style.display = 'inline';
-                }
-              }, 800);
-              setTimeout(() => {
-                if (userBubble) userBubble.textContent = promptToType;
-                if (userBubbleContainer) userBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
-              }, 500);
-              setTimeout(() => {
-                if (aiBubbleContainer) aiBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
-                s9_anim_step = 2; // Ready for user interaction
-              }, 1500);
-            }
-          }
-          typeWriter();
-        }, 5000); // 5-second delay
-      }
+  function resetSlide11Animation() {
+    document.querySelectorAll('.s11-tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.s11-content-pane').forEach(pane => pane.classList.remove('active'));
+    document.querySelector('.s11-tab-button[data-tab="1"]')?.classList.add('active');
+    document.querySelector('.s11-content-pane[data-pane="1"]')?.classList.add('active');
   }
 
+  function setupSlide11Tabs() {
+    const tabContainer = document.getElementById('s11-tab-container');
+    if (!tabContainer) return;
+    tabContainer.addEventListener('click', (e) => {
+        const clickedButton = e.target.closest('.s11-tab-button');
+        if (!clickedButton) return;
+        const tabNumber = clickedButton.getAttribute('data-tab');
+        document.querySelectorAll('.s11-tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.s11-content-pane').forEach(pane => pane.classList.remove('active'));
+        clickedButton.classList.add('active');
+        document.querySelector(`.s11-content-pane[data-pane='${tabNumber}']`)?.classList.add('active');
+    });
+  }
+  
   // --- Slide Navigation & Core Logic ---
   function updateProgressBar() {
     const percent = slides.length > 1 ? ((currentSlide) / (slides.length - 1)) * 100 : 0;
@@ -246,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
         1: resetSlide2QuoteAnimation, 2: resetSlide3ChatAnimation,
         3: resetSlide4ChatAnimation, 4: resetSlide5FlowchartAnimation,
         5: resetSlide6Animation, 6: resetSlide7Animation,
-        7: resetSlide8Animation, 8: resetSlide9Animation
+        7: resetSlide8Animation, 8: resetSlide9Animation,
+        10: resetSlide11Animation
       };
       const resetFunction = resetFunctions[oldIndex];
       if (resetFunction) resetFunction();
@@ -254,12 +202,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     currentSlide = newIndex;
     
-    // --- SLIDE-SPECIFIC ANIMATION TRIGGERS ---
-    if (currentSlide === 4) { // TCREI Flowchart
+    if (currentSlide === 4) {
       const flowchart = document.getElementById('tcrei-flowchart');
       setTimeout(() => { if (flowchart) flowchart.classList.add('start-animation'); }, 100);
     }
-    if (currentSlide === 7 && !s8_anim_triggered) { // Reference Grid
+    if (currentSlide === 7 && !s8_anim_triggered) {
       s8_anim_triggered = true;
       const cards = document.querySelectorAll('#s8-reference-grid .reference-card');
       cards.forEach((card, index) => {
@@ -268,9 +215,55 @@ document.addEventListener('DOMContentLoaded', () => {
         }, index * 100);
       });
     }
-    // A single, non-disruptive call for the slide 9 animation.
     if (currentSlide === 8) {
-      triggerSlide9Animation();
+      const placeholder = document.getElementById('s9-placeholder');
+      if (placeholder) {
+          placeholder.textContent = 'Enter a prompt for Gemini';
+          placeholder.style.display = 'inline';
+      }
+      if (s9_anim_step === 0) {
+        s9_anim_step = 1;
+        s9_delay_timer = setTimeout(() => {
+          const typedTextEl = document.getElementById('s9-typed-text');
+          const cursor = document.getElementById('s9-cursor');
+          const userBubble = document.getElementById('s9-user-bubble');
+          const userBubbleContainer = document.getElementById('s9-user-bubble-container');
+          const aiBubbleContainer = document.getElementById('s9-ai-bubble-container');
+          const promptToType = "What is the third planet from the sun?";
+          if (placeholder) placeholder.style.display = 'none';
+          if (cursor) cursor.classList.remove('opacity-0');
+          let i = 0;
+          function typeWriter() {
+            if (i < promptToType.length) {
+              if(typedTextEl) typedTextEl.textContent += promptToType.charAt(i);
+              i++;
+              setTimeout(typeWriter, 50);
+            } else {
+              if (cursor) cursor.style.display = 'none';
+              setTimeout(() => {
+                if(typedTextEl) typedTextEl.textContent = '';
+                if (placeholder) {
+                  placeholder.textContent = 'Enter a prompt for Gemini';
+                  placeholder.style.display = 'inline';
+                }
+              }, 800);
+              setTimeout(() => {
+                if (userBubble) userBubble.textContent = promptToType;
+                if (userBubbleContainer) userBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
+              }, 500);
+              setTimeout(() => {
+                if (aiBubbleContainer) aiBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
+                s9_anim_step = 2;
+              }, 1500);
+            }
+          }
+          typeWriter();
+        }, 5000);
+      }
+    }
+    if (currentSlide === 10 && !s11_initialized) {
+        setupSlide11Tabs();
+        s11_initialized = true;
     }
 
     slides.forEach((slide, index) => {
@@ -322,24 +315,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
       case 2: // Slide 3
         if (key === 'p') {
-          const userBubble = document.getElementById('user-prompt-bubble');
-          if (userBubble && userBubble.textContent !== '') return;
-          const placeholder = document.getElementById('placeholder-text'), typedTextEl = document.getElementById('typed-text'), cursor = document.getElementById('typing-cursor'),
-              userBubbleContainer = document.getElementById('user-prompt-bubble-container'), aiBubbleContainer = document.getElementById('ai-response-bubble-container'),
-              promptToType = "what is a prompt?";
-          if (placeholder) placeholder.style.display = 'none';
-          if (cursor) cursor.classList.remove('opacity-0');
-          let i = 0;
-          function typeWriter() {
-            if (i < promptToType.length) { typedTextEl.textContent += promptToType.charAt(i); i++; setTimeout(typeWriter, 80); }
-            else {
-              if (cursor) cursor.style.display = 'none';
-              setTimeout(() => { typedTextEl.textContent = ''; if (placeholder) placeholder.style.display = 'inline'; }, 800);
-              setTimeout(() => { if (userBubble) userBubble.textContent = promptToType; if (userBubbleContainer) userBubbleContainer.classList.remove('opacity-0', 'translate-y-4'); }, 500);
-              setTimeout(() => { if (aiBubbleContainer) aiBubbleContainer.classList.remove('opacity-0', 'translate-y-4'); }, 1500);
+            const userBubble = document.getElementById('user-prompt-bubble');
+            if (userBubble && userBubble.textContent !== '') return;
+            const placeholder = document.getElementById('placeholder-text'), typedTextEl = document.getElementById('typed-text'), cursor = document.getElementById('typing-cursor'),
+                userBubbleContainer = document.getElementById('user-prompt-bubble-container'), aiBubbleContainer = document.getElementById('ai-response-bubble-container'),
+                promptToType = "what is a prompt?";
+            if (placeholder) placeholder.style.display = 'none';
+            if (cursor) cursor.classList.remove('opacity-0');
+            let i = 0;
+            function typeWriter() {
+                if (i < promptToType.length) { typedTextEl.textContent += promptToType.charAt(i); i++; setTimeout(typeWriter, 80); }
+                else {
+                if (cursor) cursor.style.display = 'none';
+                setTimeout(() => { typedTextEl.textContent = ''; if (placeholder) placeholder.style.display = 'inline'; }, 800);
+                setTimeout(() => { if (userBubble) userBubble.textContent = promptToType; if (userBubbleContainer) userBubbleContainer.classList.remove('opacity-0', 'translate-y-4'); }, 500);
+                setTimeout(() => { if (aiBubbleContainer) aiBubbleContainer.classList.remove('opacity-0', 'translate-y-4'); }, 1500);
+                }
             }
-          }
-          typeWriter();
+            typeWriter();
         }
         break;
 
@@ -414,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       case 6: // Slide 7
         if (key === 'p' && s7_anim_step === 0) {
-          s7_anim_step = 0.5;
+         s7_anim_step = 0.5;
           const placeholder = document.getElementById('s7-placeholder'), typedTextEl = document.getElementById('s7-typed-text'), cursor = document.getElementById('s7-cursor'),
               contextSpan = document.getElementById('s7-context-insertion');
           const fullContext = ` The client is currently using a competitor’s LPR hardware and is seeking a thorough explanation of our Flash Vision LPR implementation process. They expect specifics on how our approach compares, including deployment steps, integration with existing systems, hardware requirements, and post-installation support.`;
@@ -434,12 +427,15 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (key === 'arrowdown') {
           const textContainer = document.getElementById('s7-prompt-text');
           if (!textContainer) return;
+          // ***** THIS IS THE BUG *****
+          // The following line was corrupted in the user's file.
           const highlightText = (textToFind, colorClass) => {
             const currentHTML = textContainer.innerHTML;
             if (!currentHTML.includes(`data-highlighted="${textToFind}"`)) {
               textContainer.innerHTML = currentHTML.replace(textToFind, `<span class="prompt-highlight ${colorClass}" data-highlighted="${textToFind}">${textToFind}</span>`);
             }
           };
+          // ***** END OF BUG LOCATION *****
           if (s7_anim_step === 1) {
             highlightText(`The client is currently using a competitor’s LPR hardware`, 'highlight-blue');
             document.getElementById('s7-callout-audience').classList.add('visible');
@@ -456,8 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         break;
       
-      // UPDATED: Keydown handler for Slide 9 is preserved.
-      case 8:
+      case 8: // Slide 9
         if (key === 'arrowdown') {
           const incorrectAnswer = document.getElementById('s9-incorrect-answer');
           if (s9_anim_step === 2) {
