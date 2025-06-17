@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const navRight = document.getElementById('nav-right');
   const navArrows = document.querySelectorAll('.nav-arrow');
   let currentSlide = 0;
-  // Merged state variables into one line
-  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0, s8_anim_triggered = false;
+  let s4_anim_step = 0, s6_anim_step = 0, s7_anim_step = 0, s8_anim_triggered = false, s9_anim_step = 0;
+  let s9_delay_timer = null; // Timer for slide 9 animation
 
   // SVG Icon strings
   const SVG_ARROW_LEFT_DARK = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // --- All Reset Functions ---
   function resetSlide2QuoteAnimation() {
     const quote = document.getElementById('slide2-quote');
     if (quote) {
@@ -131,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typedText) typedText.textContent = '';
   }
 
-  // New reset function for slide 8, correctly placed
   function resetSlide8Animation() {
     s8_anim_triggered = false;
     document.querySelectorAll('#s8-reference-grid .reference-card').forEach(card => {
@@ -139,6 +139,86 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // FIXED: Restored the full, comprehensive reset function for slide 9.
+  // This is crucial to hide the slide's elements when you navigate away.
+  function resetSlide9Animation() {
+    s9_anim_step = 0;
+    if (s9_delay_timer) clearTimeout(s9_delay_timer);
+
+    const placeholder = document.getElementById('s9-placeholder');
+    const typedText = document.getElementById('s9-typed-text');
+    const cursor = document.getElementById('s9-cursor');
+    const userBubble = document.getElementById('s9-user-bubble');
+    const userBubbleContainer = document.getElementById('s9-user-bubble-container');
+    const aiBubbleContainer = document.getElementById('s9-ai-bubble-container');
+    const incorrectAnswer = document.getElementById('s9-incorrect-answer');
+
+    if (placeholder) placeholder.textContent = '';
+    if (typedText) typedText.textContent = '';
+    if (cursor) cursor.classList.add('opacity-0');
+    if (userBubble) userBubble.textContent = '';
+    if (userBubbleContainer) userBubbleContainer.classList.add('opacity-0', 'translate-y-4');
+    if (aiBubbleContainer) aiBubbleContainer.classList.add('opacity-0', 'translate-y-4');
+    if (incorrectAnswer) {
+      incorrectAnswer.textContent = 'Mars';
+      incorrectAnswer.classList.remove('highlight');
+    }
+  }
+  
+  // A new standalone function to handle the complex animation for slide 9.
+  function triggerSlide9Animation() {
+      // Set the initial state of the slide every time it's triggered
+      const placeholder = document.getElementById('s9-placeholder');
+      if (placeholder) {
+          placeholder.textContent = 'Enter a prompt for Gemini';
+          placeholder.style.display = 'inline';
+      }
+
+      // Only start the timer-based animation if it hasn't already run
+      if (s9_anim_step === 0) {
+        s9_anim_step = 1; // Mark as started
+        s9_delay_timer = setTimeout(() => {
+          const typedTextEl = document.getElementById('s9-typed-text');
+          const cursor = document.getElementById('s9-cursor');
+          const userBubble = document.getElementById('s9-user-bubble');
+          const userBubbleContainer = document.getElementById('s9-user-bubble-container');
+          const aiBubbleContainer = document.getElementById('s9-ai-bubble-container');
+          const promptToType = "What is the third planet from the sun?";
+          
+          if (placeholder) placeholder.style.display = 'none';
+          if (cursor) cursor.classList.remove('opacity-0');
+          
+          let i = 0;
+          function typeWriter() {
+            if (i < promptToType.length) {
+              if(typedTextEl) typedTextEl.textContent += promptToType.charAt(i);
+              i++;
+              setTimeout(typeWriter, 50);
+            } else {
+              if (cursor) cursor.style.display = 'none';
+              setTimeout(() => {
+                if(typedTextEl) typedTextEl.textContent = '';
+                if (placeholder) {
+                  placeholder.textContent = 'Enter a prompt for Gemini';
+                  placeholder.style.display = 'inline';
+                }
+              }, 800);
+              setTimeout(() => {
+                if (userBubble) userBubble.textContent = promptToType;
+                if (userBubbleContainer) userBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
+              }, 500);
+              setTimeout(() => {
+                if (aiBubbleContainer) aiBubbleContainer.classList.remove('opacity-0', 'translate-y-4');
+                s9_anim_step = 2; // Ready for user interaction
+              }, 1500);
+            }
+          }
+          typeWriter();
+        }, 5000); // 5-second delay
+      }
+  }
+
+  // --- Slide Navigation & Core Logic ---
   function updateProgressBar() {
     const percent = slides.length > 1 ? ((currentSlide) / (slides.length - 1)) * 100 : 0;
     if (progressBar) progressBar.style.width = percent + '%';
@@ -165,8 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const resetFunctions = {
         1: resetSlide2QuoteAnimation, 2: resetSlide3ChatAnimation,
         3: resetSlide4ChatAnimation, 4: resetSlide5FlowchartAnimation,
-        5: resetSlide6Animation, 6: resetSlide7Animation, // Corrected missing comma
-        7: resetSlide8Animation
+        5: resetSlide6Animation, 6: resetSlide7Animation,
+        7: resetSlide8Animation, 8: resetSlide9Animation
       };
       const resetFunction = resetFunctions[oldIndex];
       if (resetFunction) resetFunction();
@@ -174,21 +254,23 @@ document.addEventListener('DOMContentLoaded', () => {
     
     currentSlide = newIndex;
     
-    // Trigger animation for slide 5 (TCREI flowchart)
-    if (currentSlide === 4) {
+    // --- SLIDE-SPECIFIC ANIMATION TRIGGERS ---
+    if (currentSlide === 4) { // TCREI Flowchart
       const flowchart = document.getElementById('tcrei-flowchart');
       setTimeout(() => { if (flowchart) flowchart.classList.add('start-animation'); }, 100);
     }
-
-    // Trigger animation for slide 8 (Reference Grid)
-    if (currentSlide === 7 && !s8_anim_triggered) {
+    if (currentSlide === 7 && !s8_anim_triggered) { // Reference Grid
       s8_anim_triggered = true;
       const cards = document.querySelectorAll('#s8-reference-grid .reference-card');
       cards.forEach((card, index) => {
         setTimeout(() => {
           card.classList.add('animate-in');
-        }, index * 100); // 100ms stagger effect
+        }, index * 100);
       });
+    }
+    // A single, non-disruptive call for the slide 9 animation.
+    if (currentSlide === 8) {
+      triggerSlide9Animation();
     }
 
     slides.forEach((slide, index) => {
@@ -231,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     switch (currentSlide) {
-      case 1: // Slide 2
+      case 1:
         if (key === 'q') {
           const quote = document.getElementById('slide2-quote');
           if (quote) quote.classList.add('opacity-100');
@@ -354,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (!textContainer) return;
           const highlightText = (textToFind, colorClass) => {
             const currentHTML = textContainer.innerHTML;
-            // Only replace if not already highlighted
             if (!currentHTML.includes(`data-highlighted="${textToFind}"`)) {
               textContainer.innerHTML = currentHTML.replace(textToFind, `<span class="prompt-highlight ${colorClass}" data-highlighted="${textToFind}">${textToFind}</span>`);
             }
@@ -371,6 +452,23 @@ document.addEventListener('DOMContentLoaded', () => {
             highlightText(`including deployment steps, integration with existing systems, hardware requirements, and post-installation support.`, 'highlight-coral');
             document.getElementById('s7-callout-constraints').classList.add('visible');
             s7_anim_step = 4;
+          }
+        }
+        break;
+      
+      // UPDATED: Keydown handler for Slide 9 is preserved.
+      case 8:
+        if (key === 'arrowdown') {
+          const incorrectAnswer = document.getElementById('s9-incorrect-answer');
+          if (s9_anim_step === 2) {
+            incorrectAnswer?.classList.add('highlight');
+            s9_anim_step = 3;
+          } else if (s9_anim_step === 3) {
+            if(incorrectAnswer) {
+              incorrectAnswer.innerHTML = '<strong>Earth</strong>';
+              incorrectAnswer.classList.remove('highlight');
+            }
+            s9_anim_step = 4;
           }
         }
         break;

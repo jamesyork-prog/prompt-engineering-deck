@@ -320,3 +320,11 @@ body {
     padding: 2rem 1.5rem; /* Adjust padding for smaller screens */
   }
 }
+
+/* ---- Slide 9: Evaluate Animation Styles ---- */
+#s9-incorrect-answer.highlight {
+  background-color: #ffe4e6; /* A light red/pink for highlighting */
+  border-radius: 4px;
+  padding: 0 4px;
+  transition: background-color 0.3s;
+}
